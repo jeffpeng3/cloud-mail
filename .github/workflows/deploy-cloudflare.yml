@@ -87,12 +87,12 @@ jobs:
           if [ -n "$DOMAIN" ]; then
             if echo "$DOMAIN" | jq . > /dev/null 2>&1; then
               ESCAPED_DOMAIN=$(echo "$DOMAIN" | sed 's/"/\\"/g' | tr -d '\n')
-              sed -i "s|\${DOMAIN}|${ESCAPED_DOMAIN}|g" "$CONFIG_FILE"
+              sed -i "s|\"\${DOMAIN}\"|${ESCAPED_DOMAIN}|g" "$CONFIG_FILE"
             else
-              sed -i "s|\${DOMAIN}|${DOMAIN}|g" "$CONFIG_FILE"
+              sed -i "s|\"\${DOMAIN}\"|${DOMAIN}|g" "$CONFIG_FILE"
             fi
           else
-            sed -i "s|\${DOMAIN}||g" "$CONFIG_FILE"
+            sed -i "s|\"\${DOMAIN}\"||g" "$CONFIG_FILE"
           fi
           
           echo "🚀 Configuration updated. Starting deployment..."
