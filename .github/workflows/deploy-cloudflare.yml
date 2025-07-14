@@ -98,9 +98,6 @@ jobs:
           echo "🚀 Configuration updated. Starting deployment..."
           npx wrangler deploy -c "$CONFIG_FILE" | grep -v "https://.*\.workers\.dev" || true
           echo "✅ Deployment command executed."
-          
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
         
       - name: 🗄️ Initialize Database (if INIT_URL is set)
         if: steps.deploy.outputs.deployment_skipped == 'false'
